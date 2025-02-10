@@ -1,5 +1,5 @@
 #include "Copter.h"
-
+// 用来控制“解锁”的
 #pragma GCC diagnostic push
 #if defined(__clang__)
 #pragma GCC diagnostic ignored "-Wbitwise-instead-of-logical"

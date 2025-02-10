@@ -1,7 +1,7 @@
 #include "Copter.h"
 
 /*****************************************************************************
-* Functions to check and perform ESC calibration
+* Functions to check and perform ESC calibration 电调校准
 *****************************************************************************/
 
 #define ESC_CALIBRATION_HIGH_THROTTLE   950

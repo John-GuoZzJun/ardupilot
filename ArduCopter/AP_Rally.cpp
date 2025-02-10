@@ -33,4 +33,4 @@ bool AP_Rally_Copter::is_valid(const Location &rally_point) const
     return true;
 }
 
-#endif  // HAL_RALLY_ENABLED
+#endif  // HAL_RALLY_ENABLED 判断目的地是否在电子围栏内

@@ -1,6 +1,6 @@
 #include "Copter.h"
 
-// ---------------------------------------------
+// --------------------------------------------- 该文件用于状态转换
 void Copter::set_auto_armed(bool b)
 {
     // if no change, exit immediately

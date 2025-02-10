@@ -1,5 +1,5 @@
 /*
-  copter specific AP_AdvancedFailsafe class
+  copter specific AP_AdvancedFailsafe class 存放新出的增强型的施工保护（平常用不到）
  */
 
 #include "Copter.h"

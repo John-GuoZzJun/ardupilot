@@ -1,7 +1,7 @@
 #include "Copter.h"
 
 //
-//  failsafe support
+//  failsafe support 失控保护
 //  Andrew Tridgell, December 2011
 //
 //  our failsafe strategy is to detect main loop lockup and disarm the motors
