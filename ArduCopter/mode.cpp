@@ -178,6 +178,12 @@ Mode *Copter::mode_from_mode_num(const Mode::Number mode)
             ret = &mode_turtle;
             break;
 #endif
+        
+#if MODE_DRAWSTAR_ENABLED == ENABLED
+        case Mode::Number::DRAWSTAR:
+            ret = &mode_drawstar;
+            break;
+#endif
 
         default:
             break;
