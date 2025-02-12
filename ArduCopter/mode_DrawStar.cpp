@@ -21,7 +21,8 @@ bool ModeDrawStar::init(bool ignore_checks)
 
 void ModeDrawStar::generate_path() // 生成五角星航线
 {
-    float radius_cm = 1000.0;
+    //float radius_cm = 1000.0;
+    float radius_cm = g2.star_radius_cm; // 在Parameters中新增的变量
 
     wp_nav->get_wp_stopping_point(path[0]);
 
