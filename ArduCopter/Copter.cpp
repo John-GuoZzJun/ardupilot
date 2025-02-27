@@ -197,6 +197,7 @@ const AP_Scheduler::Task Copter::scheduler_tasks[] = {
     SCHED_TASK(loop_rate_logging, LOOP_RATE,    50,  75),
 #endif
     SCHED_TASK(one_hz_loop,            1,    100,  81),
+    SCHED_TASK(update_OpenMV,        400,    100,   174),  // 再最顶层定义一个任务：以400Hz速度调用update()
     SCHED_TASK(ekf_check,             10,     75,  84),
     SCHED_TASK(check_vibration,       10,     50,  87),
     SCHED_TASK(gpsglitch_check,       10,     50,  90),
@@ -519,6 +520,11 @@ void Copter::update_batt_compass(void)
     }
 }
 
+void Copter::update_OpenMV(void)
+{
+    openmv.update();
+}
+
 #if HAL_LOGGING_ENABLED
 // Full rate logging of attitude, rate and pid loops
 // should be run at loop rate
@@ -670,6 +676,11 @@ void Copter::one_hz_loop()
 #if HAL_ADSB_ENABLED
     adsb.set_is_flying(!ap.land_complete);
 #endif
+
+    gcs().send_text(MAV_SEVERITY_CRITICAL,
+                    "OpenMV X:%d Y:%d",
+                    openmv.cx,
+                    openmv.cy);
 
     AP_Notify::flags.flying = !ap.land_complete;
 

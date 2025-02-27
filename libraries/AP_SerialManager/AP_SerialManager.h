@@ -82,6 +82,7 @@ public:
         SerialProtocol_IMUOUT = 46,
         // Reserving Serial Protocol 47 for SerialProtocol_IQ
         SerialProtocol_PPP = 48,
+        SerialProtocol_OPEN_MV = 49, // 在串口类型的地方设置为49，就是连接OpenMV
         SerialProtocol_NumProtocols                    // must be the last value
     };
 

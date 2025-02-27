@@ -72,6 +72,7 @@
 #include <AC_PrecLand/AC_PrecLand_config.h>
 #include <AP_OpticalFlow/AP_OpticalFlow.h>
 #include <AP_Winch/AP_Winch_config.h>
+#include <AP_OpenMV/AP_OpenMV.h>  // 连接OpenMV的头文件
 
 // Configuration
 #include "defines.h"
@@ -255,6 +256,8 @@ private:
 #if HAL_LOGGING_ENABLED
     AP_Logger logger;
 #endif
+
+    AP_OpenMV openmv{};
 
     // flight modes convenience array
     AP_Int8 *flight_modes;
@@ -707,6 +710,7 @@ private:
     void rc_loop();
     void throttle_loop();
     void update_batt_compass(void);
+    void update_OpenMV(void);   // 定义update_OpenMv()这个函数
     void loop_rate_logging();
     void ten_hz_logging_loop();
     void twentyfive_hz_logging();
