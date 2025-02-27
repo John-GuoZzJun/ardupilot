@@ -95,7 +95,8 @@ enum LoggingParameters {
      LOG_GUIDED_POSITION_TARGET_MSG,
      LOG_SYSIDD_MSG,
      LOG_SYSIDS_MSG,
-     LOG_GUIDED_ATTITUDE_TARGET_MSG
+     LOG_GUIDED_ATTITUDE_TARGET_MSG,
+     LOG_OPENMV_MSG,    // 定义了一个OpenMV的枚举类型
 };
 
 #define MASK_LOG_ATTITUDE_FAST          (1<<0)

@@ -5,6 +5,25 @@
 // Code to Write and Read packets from AP_Logger log memory
 // Code to interact with the user to dump or erase logs
 
+struct PACKED log_OpenMV {  // 定义日志的结构体
+    LOG_PACKET_HEADER;  // 1.包含一个PACKET头，跟数据帧一样（帧头1、帧头2、消息ID）
+    uint64_t time_us;   // 2.包含一个time_us （微秒）：记录日志是在哪个时刻记录下来
+    uint8_t cx;         // 3.自定义部分
+    uint8_t cy;
+};
+
+// Write an OpenMV packet
+void Copter::Log_Write_OpenMV() // 往结构体中存数的一个程序
+{
+    struct log_OpenMV pkt = {   // 定义一个新的结构体，类型是log_OpenMV
+        LOG_PACKET_HEADER_INIT(LOG_OPENMV_MSG), // 初始化头
+        time_us         : AP_HAL::micros64(),   // 把时间填入时间
+        cx              : openmv.cx,
+        cy              : openmv.cy
+    };
+    logger.WriteBlock(&pkt, sizeof(pkt));   // 把结构体(pkt)的数写到日志(logger)
+}
+
 struct PACKED log_Control_Tuning {
     LOG_PACKET_HEADER;
     uint64_t time_us;
@@ -558,6 +577,10 @@ const struct LogStructure Copter::log_structure[] = {
 
     { LOG_GUIDED_ATTITUDE_TARGET_MSG, sizeof(log_Guided_Attitude_Target),
       "GUIA",  "QBffffffff",    "TimeUS,Type,Roll,Pitch,Yaw,RollRt,PitchRt,YawRt,Thrust,ClimbRt", "s-dddkkk-n", "F-000000-0" , true },
+
+    { LOG_OPENMV_MSG, sizeof(log_OpenMV),
+      "OMV",   "QBB",   "TimeUS,cx,xy", "s--", "F--" }, //"OMV":简称，最终显示在MissionPlanner里，“QBB"定义存储的变量的数据类型：Q(64位)-对应TimeUS，B(8位)
+      
 };
 
 void Copter::Log_Write_Vehicle_Startup_Messages()

@@ -853,6 +853,7 @@ private:
 #if HAL_LOGGING_ENABLED
     // Log.cpp
     void Log_Write_Control_Tuning();
+    void Log_Write_OpenMV();    // OpenMV日志记录
     void Log_Write_Attitude();
     void Log_Write_EKF_POS();
     void Log_Write_PIDS();

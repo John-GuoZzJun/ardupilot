@@ -522,7 +522,10 @@ void Copter::update_batt_compass(void)
 
 void Copter::update_OpenMV(void)
 {
-    openmv.update();
+    // openmv.update();
+    if(openmv.update()) // 每成功解析一帧，调用下面的函数存储一条日志；最后在MissionPlanner下载日志
+        Log_Write_OpenMV();
+
 }
 
 #if HAL_LOGGING_ENABLED
