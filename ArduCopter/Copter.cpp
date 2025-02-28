@@ -266,6 +266,9 @@ const AP_Scheduler::Task Copter::scheduler_tasks[] = {
 #if STATS_ENABLED == ENABLED
     SCHED_TASK_CLASS(AP_Stats,             &copter.g2.stats,            update,           1, 100, 171),
 #endif
+
+    SCHED_TASK(update_OpenMV,        400,    100, 174),
+
 };
 
 void Copter::get_scheduler_tasks(const AP_Scheduler::Task *&tasks,
@@ -519,6 +522,11 @@ void Copter::update_batt_compass(void)
     }
 }
 
+void Copter::update_OpenMV(void)
+{
+    openmv.update();
+}
+
 #if HAL_LOGGING_ENABLED
 // Full rate logging of attitude, rate and pid loops
 // should be run at loop rate
@@ -679,6 +687,12 @@ void Copter::one_hz_loop()
 #if AC_CUSTOMCONTROL_MULTI_ENABLED == ENABLED
     custom_control.set_notch_sample_rate(AP::scheduler().get_filtered_loop_rate_hz());
 #endif
+
+    gcs().send_text(MAV_SEVERITY_CRITICAL,
+                    "OpenMV X:%d Y:%d",
+                    openmv.cx,
+                    openmv.cy);
+
 }
 
 void Copter::init_simple_bearing()
